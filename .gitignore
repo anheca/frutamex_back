@@ -1,2 +1,5 @@
 # ignorar este archivo
 src/keys.js
+
+# Ignore archivo .env
+.env
