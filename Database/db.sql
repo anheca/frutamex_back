@@ -1,18 +1,82 @@
-CREATE DATABASE `frutamexdb`;
-
+DROP SCHEMA IF EXISTS frutamexdb;
+CREATE SCHEMA frutamexdb;
 USE frutamexdb;
 
-CREATE TABLE customers
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE users
 (
-    id INT(11) NOT NULL,
-    name VARCHAR(60) NOT NULL,
-    lastName VARCHAR(80) NOT NULL,
-    email VARCHAR(160) NOT NULL,
-    password VARCHAR(256) NOT NULL
-);
+    id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    userName VARCHAR(60) NOT NULL,
+    password VARCHAR(256) NOT NULL,
+    fullName VARCHAR(150) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    last_update TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-ALTER TABLE customers
-	ADD PRIMARY KEY (id);
 
-ALTER TABLE customers
-	MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 1;
+--
+-- Table structure for table `country`
+--
+
+CREATE TABLE country (
+  id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  country VARCHAR(50) NOT NULL,
+  last_update TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY  (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+--
+-- Table structure for table `city`
+--
+
+CREATE TABLE city (
+  id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  city VARCHAR(50) NOT NULL,
+  countryId SMALLINT UNSIGNED NOT NULL,
+  last_update TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY  (id),
+  KEY idx_fk_country_id (countryId),
+  CONSTRAINT `fk_city_country` FOREIGN KEY (countryId) REFERENCES country (id) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+--
+-- Table structure for table `address`
+--
+
+CREATE TABLE address
+(
+	id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    address1 VARCHAR(80) NOT NULL,
+    address2 VARCHAR(80) DEFAULT NULL,
+    cityId SMALLINT UNSIGNED,
+    postalCode VARCHAR(10) DEFAULT NULL,
+    phone VARCHAR(20) NOT NULL,
+    last_update TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY(id),
+    CONSTRAINT `fk_address_city` FOREIGN KEY (cityId) REFERENCES city (id) ON DELETE RESTRICT ON UPDATE CASCADE
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+--
+-- Table structure for table `customer`
+--
+
+CREATE TABLE customer (
+  id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  customerName VARCHAR(80) NOT NULL,
+  email VARCHAR(80) DEFAULT NULL,
+  addressId SMALLINT UNSIGNED NOT NULL,
+  active BOOLEAN NOT NULL DEFAULT TRUE,
+  create_date DATETIME NOT NULL,
+  last_update TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY  (id),
+  KEY idx_fk_address_id (addressId),
+  KEY idx_customerName (customerName),
+  CONSTRAINT fk_customer_address FOREIGN KEY (addressId) REFERENCES address (id) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
