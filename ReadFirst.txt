@@ -1,0 +1,20 @@
+INSTALACION DE MODULOS REQUERIDOS:
+==================================
+1. npm i    express 
+            express-handlebars 
+            express-session 
+            mysql 
+            express-mysql-session 
+            morgan 
+            bcryptjs 
+            passport 
+            passport-local 
+            timeago.js 
+            connect-flash
+            express-validator
+2. npm i nodemon -D
+3. crear folders: mkdir lib public routes views 
+4. crear los archivos: touch index.js keys.js database.js
+5. configuramos el servidor (express)
+6. modificamos el archivo package.json e incluimos el comando dev
+7. ejecutamos el comando: npm run dev

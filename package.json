@@ -1,0 +1,37 @@
+{
+  "name": "Frutamex_Back",
+  "version": "1.0.0",
+  "description": "Frutamex-BK",
+  "main": "index.js",
+  "scripts": {
+    "dev": "clear && nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anheca/frutamex_back.git"
+  },
+  "keywords": [],
+  "author": "anheca",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anheca/frutamex_back/issues"
+  },
+  "homepage": "https://github.com/anheca/frutamex_back#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
+    "express": "^4.17.1",
+    "express-handlebars": "^4.0.3",
+    "express-mysql-session": "^2.1.4",
+    "express-session": "^1.17.0",
+    "express-validator": "^6.4.0",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "timeago.js": "^4.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
