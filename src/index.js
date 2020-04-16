@@ -55,7 +55,7 @@ app.use((req, res, next) => {
  */
 app.use(require("./routes/index.js"));
 app.use(require("./routes/authentication.js"));
-app.use("/links", require("./routes/links.js"));
+app.use("/customers", require("./routes/customers.js"));
 
 /* 
    Public
