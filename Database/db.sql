@@ -1,0 +1,18 @@
+CREATE DATABASE `frutamexdb`;
+
+USE frutamexdb;
+
+CREATE TABLE customers
+(
+    id INT(11) NOT NULL,
+    name VARCHAR(60) NOT NULL,
+    lastName VARCHAR(80) NOT NULL,
+    email VARCHAR(160) NOT NULL,
+    password VARCHAR(256) NOT NULL
+);
+
+ALTER TABLE customers
+	ADD PRIMARY KEY (id);
+
+ALTER TABLE customers
+	MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 1;
